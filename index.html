@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+
+    <div id="timer">00:30</div>
+
+    <form>
+        <fieldset>
+            <legend>Are you stressed?</legend>
+            <label for="yes">Yes</label>
+            <input name="smarter" type="radio" value="yes" id="yes" />
+
+            <label for="no">No</label>
+            <input name="smarter" type="radio" value="no" id="no" />
+        </fieldset>
+
+        <button type="button" id="moveOnButton">Move on</button>
+    </form>
+
+    <!-- "That's a shame" message (hidden initially) -->
+    <div id="shameMessage">Good for you</div>
+
+    <!-- "Try Again" button (hidden initially) -->
+    <button type="button" id="tryAgainButton" style="display: none;">Next</button>
+
+    <!-- "Good Job" message (hidden initially) -->
+    <div id="goodJobMessage">Watch this</div>
+
+    <!-- Video Popup -->
+    <div id="videoPopup" class="hidden">
+        <div id="videoContainer">
+            <iframe id="video" width="560" height="315" 
+                src="https://www.youtube.com/embed/SfqQNf-tkYM?autoplay=1" 
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+            <button id="closeVideo">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    let timerStarted = false;
+    let countdownInterval;
+    let firstYesSelected = false;  
+    let secondYesSelected = false; 
+
+    // Function to start the countdown timer
+    function startTimer(duration) {
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+
+        let countDownDate = new Date().getTime() + duration;
+
+        countdownInterval = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var seconds = Math.floor(distance / 1000);
+            var minutes = Math.floor(seconds / 60);
+            seconds = seconds % 60;
+
+            document.getElementById("timer").innerHTML = minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("timer").innerHTML = "Divine Intervention";
+                document.getElementById("timer").classList.add("expired-message");
+                document.querySelector("form").classList.add("disabled");
+                document.getElementById("moveOnButton").disabled = true;
+            }
+        }, 1000);
+    }
+
+    // Start timer on mouse movement
+    document.addEventListener("mousemove", function() {
+        if (!timerStarted) {
+            startTimer(30000); // Start the timer with 30 seconds duration
+            timerStarted = true;
+        }
+        document.removeEventListener("mousemove", arguments.callee);
+    });
+
+    // Function to handle the "Move on" button click
+    function handleMoveOnClick() {
+        const selectedAnswer = document.querySelector('input[name="smarter"]:checked');
+
+        if (selectedAnswer && selectedAnswer.value === "yes" && document.getElementById("timer").innerHTML !== "Divine Intervention") {
+            // Change the question text to "Do you really?"
+            document.querySelector("legend").textContent = "Do you really?";
+
+            // Reset "Yes" selection for the first time
+            document.getElementById("yes").checked = false;
+
+            // Track first "Yes" selection
+            if (!firstYesSelected) {
+                firstYesSelected = true;
+            }
+            else if (firstYesSelected && !secondYesSelected) {
+                secondYesSelected = true;
+
+                // Hide the form and timer
+                document.querySelector("form").classList.add("hidden");
+                document.getElementById("timer").classList.add("hidden");
+
+                // Change the background color to pale pink
+                document.body.style.backgroundColor = "#fadadd";
+
+                // Show the "Good Job" message
+                document.getElementById("goodJobMessage").style.display = "block";
+
+                // Show the video popup after a delay
+                setTimeout(function() {
+                    document.getElementById("videoPopup").classList.remove("hidden"); // Make the popup visible
+                    console.log('Video popup should now be visible');
+                }, 1000); // Delay of 1 second before showing video
+            }
+        }
+        else if (selectedAnswer && selectedAnswer.value === "no" && document.getElementById("timer").innerHTML !== "Divine Intervention") {
+            // Hide the form and timer
+            document.querySelector("form").classList.add("hidden");
+            document.getElementById("timer").classList.add("hidden");
+            document.getElementById("shameMessage").style.display = "block";
+            document.getElementById("tryAgainButton").style.display = "inline-block";
+            document.getElementById("moveOnButton").disabled = true;
+        }
+        else {
+            alert("Please select an answer before proceeding.");
+        }
+    }
+
+    // Event listener for the "Move on" button
+    document.getElementById("moveOnButton").addEventListener("click", handleMoveOnClick);
+
+    // Event listener for the "Try again" button
+    document.getElementById("tryAgainButton").addEventListener("click", function() {
+        location.reload();
+    });
+
+    // Close the video popup
+    document.getElementById("closeVideo").addEventListener("click", function() {
+        document.getElementById("videoPopup").classList.add("hidden");
+    });
+});
+
+    </script>
+
+</body>
+</html>
