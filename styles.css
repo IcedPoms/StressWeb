@@ -64,7 +64,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* Style for the form */
+
 form {
     display: inline-block;
     padding: 20px;
@@ -72,30 +72,29 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
-/* Style for the legend (question header) */
+
 legend {
     font-size: 1.5em;
     margin-bottom: 15px;
 }
 
-/* Style for the labels next to radio buttons */
+
 label {
     font-size: 1.2em;
     margin-right: 20px;
 }
 
-/* Style for radio buttons */
+
 input[type="radio"] {
     margin-right: 10px;
 }
 
-/* Disabled state for form when time expires */
+
 .disabled {
     pointer-events: none;
     opacity: 0.5;
 }
 
-/* Style for the "Divine Intervention" message */
 .expired-message {
     color: red;
     font-size: 3em;
@@ -103,7 +102,6 @@ input[type="radio"] {
     margin-top: 20px;
 }
 
-/* Style for the "Move on" button */
 #moveOnButton {
     margin-top: 20px;
     padding: 10px 20px;
@@ -121,7 +119,7 @@ input[type="radio"] {
     color: white;
 }
 
-/* Disabled state for the "Move on" button */
+
 #moveOnButton.disabled,
 #moveOnButton:disabled {
     background-color: #cccccc;
@@ -130,16 +128,16 @@ input[type="radio"] {
     cursor: not-allowed;
 }
 
-/* Style for the "That's a shame" message */
+
 #shameMessage {
     color: red;
     font-size: 2em;
     font-weight: bold;
     margin-top: 20px;
-    display: none; /* Initially hidden */
+    display: none; 
 }
 
-/* Style for the "Try again" button */
+
 #tryAgainButton {
     margin-top: 20px;
     padding: 10px 20px;
@@ -156,33 +154,32 @@ input[type="radio"] {
     border-color: red;
 }
 
-/* Hide the form and timer when "No" is selected */
+
 .hidden {
     display: none;
 }
 
-/* Style for the "Good Job" message */
+
 #goodJobMessage {
-    color: #1d4474; /* Greenish color for "Good Job" */
+    color: #1d4474; 
     font-size: 3em;
     font-weight: bold;
     margin-top: 20px;
-    display: none; /* Initially hidden */
+    display: none; 
 }
 
-/* Video Popup Styles */
+
 #videoPopup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+    background-color: rgba(0, 0, 0, 0.7); 
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Ensure this is high enough to be on top of other content */
-    /* display: none; /* Initially hidden */
+    z-index: 9999; 
 }
 
 #videoContainer {
@@ -199,7 +196,7 @@ input[type="radio"] {
 }
 
 #closeVideo {
-    margin-top: 20px; /* Space between the video and the button */
+    margin-top: 20px; 
     padding: 10px 20px;
     font-size: 1.2em;
     background-color: white;
@@ -209,7 +206,7 @@ input[type="radio"] {
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     display: block;
-    width: 200px; /* Fixed width for button */
+    width: 200px; 
     text-align: center;
 }
 
@@ -222,13 +219,13 @@ input[type="radio"] {
    Helper classes 
    ========================================================================== */
 
-/* Hide visually and from screen readers */
+
 .hidden,
 [hidden] {
   display: none !important;
 }
 
-/* Hide only visually but have it available for screen readers */
+
 .visually-hidden {
   border: 0;
   clip: rect(0, 0, 0, 0);
@@ -252,7 +249,6 @@ input[type="radio"] {
   width: auto;
 }
 
-/* Clearfix: contain floats */
 .clearfix::before,
 .clearfix::after {
   content: "";
@@ -267,14 +263,14 @@ input[type="radio"] {
    EXAMPLE Media Queries for Responsive Design 
    ========================================================================== */
 
-/* Media query for devices with a minimum width of 35em */
+
 @media only screen and (min-width: 35em) {
   html {
     align-items: center;
   }
 }
 
-/* Media query for devices smaller than 35em */
+
 @media only screen and (max-width: 768px) {
   body {
     font-size: 1.1em;
@@ -311,10 +307,10 @@ input[type="radio"] {
   (-webkit-min-device-pixel-ratio: 1.25),
   (min-resolution: 1.25dppx),
   (min-resolution: 120dpi) {
-  /* Add styles for high-resolution devices here */
+  
 }
 
-/* Print-specific styles */
+
 @media print {
   * {
     background: #fff !important;

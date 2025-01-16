@@ -24,16 +24,12 @@
         <button type="button" id="moveOnButton">Move on</button>
     </form>
 
-    <!-- "That's a shame" message (hidden initially) -->
     <div id="shameMessage">Good for you</div>
 
-    <!-- "Try Again" button (hidden initially) -->
     <button type="button" id="tryAgainButton" style="display: none;">Next</button>
 
-    <!-- "Good Job" message (hidden initially) -->
     <div id="goodJobMessage">Watch this</div>
 
-    <!-- Video Popup -->
     <div id="videoPopup" class="hidden">
         <div id="videoContainer">
             <iframe id="video" width="560" height="315" 
@@ -51,7 +47,6 @@
     let firstYesSelected = false;  
     let secondYesSelected = false; 
 
-    // Function to start the countdown timer
     function startTimer(duration) {
         if (countdownInterval) {
             clearInterval(countdownInterval);
@@ -79,52 +74,50 @@
         }, 1000);
     }
 
-    // Start timer on mouse movement
     document.addEventListener("mousemove", function() {
         if (!timerStarted) {
-            startTimer(30000); // Start the timer with 30 seconds duration
+            startTimer(30000); 
             timerStarted = true;
         }
         document.removeEventListener("mousemove", arguments.callee);
     });
 
-    // Function to handle the "Move on" button click
     function handleMoveOnClick() {
         const selectedAnswer = document.querySelector('input[name="smarter"]:checked');
 
         if (selectedAnswer && selectedAnswer.value === "yes" && document.getElementById("timer").innerHTML !== "Divine Intervention") {
-            // Change the question text to "Are you really?"
+
             document.querySelector("legend").textContent = "Are you really?";
 
-            // Reset "Yes" selection for the first time
+            
             document.getElementById("yes").checked = false;
 
-            // Track first "Yes" selection
+            
             if (!firstYesSelected) {
                 firstYesSelected = true;
             }
             else if (firstYesSelected && !secondYesSelected) {
                 secondYesSelected = true;
 
-                // Hide the form and timer
+                
                 document.querySelector("form").classList.add("hidden");
                 document.getElementById("timer").classList.add("hidden");
 
-                // Change the background color to pale pink
+                
                 document.body.style.backgroundColor = "#fadadd";
 
-                // Show the "Good Job" message
+                
                 document.getElementById("goodJobMessage").style.display = "block";
 
-                // Show the video popup after a delay
+                
                 setTimeout(function() {
-                    document.getElementById("videoPopup").classList.remove("hidden"); // Make the popup visible
+                    document.getElementById("videoPopup").classList.remove("hidden"); 
                     console.log('Video popup should now be visible');
-                }, 1000); // Delay of 1 second before showing video
+                }, 1000); 
             }
         }
         else if (selectedAnswer && selectedAnswer.value === "no" && document.getElementById("timer").innerHTML !== "Divine Intervention") {
-            // Hide the form and timer
+            
             document.querySelector("form").classList.add("hidden");
             document.getElementById("timer").classList.add("hidden");
             document.getElementById("shameMessage").style.display = "block";
@@ -136,15 +129,14 @@
         }
     }
 
-    // Event listener for the "Move on" button
+    
     document.getElementById("moveOnButton").addEventListener("click", handleMoveOnClick);
 
-    // Event listener for the "Try again" button
+    
     document.getElementById("tryAgainButton").addEventListener("click", function() {
         location.reload();
     });
 
-    // Close the video popup
     document.getElementById("closeVideo").addEventListener("click", function() {
         document.getElementById("videoPopup").classList.add("hidden");
     });
